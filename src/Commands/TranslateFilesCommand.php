@@ -73,7 +73,7 @@ class TranslateFilesCommand extends Command
         if ($should_verbose === 'Yes') {
             $this->verbose = true;
         }
-        $mode = $this->choice('Use text exploration and json translation or php files?', ['json', 'php'], 'php');
+        $mode = $this->choice('Use text exploration and json translation or php files?', ['json', 'php'], 'json');
         $this->json = false;
         if ($mode === 'json') {
             $this->json = true;
@@ -95,9 +95,6 @@ class TranslateFilesCommand extends Command
         $this->line("");
         // loop target locales
         foreach ($this->locales as $locale) {
-            if ($locale == $this->base_locale) {
-                continue;
-            }
             $this->line($this->base_locale . " -> " . $locale . " translating...");
             $file_translator->handle($locale);
             $this->line($this->base_locale . " -> " . $locale . " translated.");
